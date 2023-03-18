@@ -1,24 +1,18 @@
-from flask import Flask, render_template, request, url_for
-from faker import Faker
+from flask import Flask, render_template, request, url_for, redirect
+from admin import admin
 
 app = Flask(__name__)
+app.register_blueprint(admin, url_prefix="/admin")
 
-faker = Faker()
 
 links = [
     ["/orders", "Orders"],
     ["/clients", "Clients"],
     ["/employees", "Employees"],
+    ["/create_order", "Create order"]
 ]
-orders_mock = [
-    "Salad",
-    "Some fruit",
-    "Some garbage",
-    "Some fastfood",
-    "Whatever",
-]
-
-clients_mock = [faker.name() for _ in range(5)]
+orders_mock = []
+clients_mock = []
 
 
 @app.route("/")
@@ -26,26 +20,41 @@ def index():
     return render_template("index.html", links=links)
 
 
-@app.route("/orders")
-def orders():
+@app.route("/order_list")
+def order_list():
     return render_template(
-        "orders.html",
+        "order-list.html",
         links=links,
         orders=orders_mock,
     )
 
-@app.route("/test")
-def test():
-    return url_for("orders")
+
+@app.route("/order_create", methods=["GET", "POST"])
+def order_create():
+    if request.method == "GET":
+        return render_template("create_orders.html")
+    else:
+        name = request.form.get("name")
+        ticket_number = request.form.get("ticket_number")
+
+        orders_mock.append(name)
+        print(orders_mock)
+        return redirect(url_for("create_order"))
 
 
-@app.route("/clients")
-def clients():
+@app.route("/client_list")
+def client_list():
     return render_template("clients.html", links=links, clients=clients_mock)
 
 
-@app.route("/employees")
-def employees():
+@app.route("/client_create", methods=["GET", "POST"])
+def client_create():
+    if request.method == "GET":
+        return render_template("client-create.html")
+
+
+@app.route("/employee_list")
+def employee_list():
     return render_template("employees.html")
 
 

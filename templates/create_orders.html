@@ -1,0 +1,10 @@
+{% extends "template.html" %}
+{% block content %}
+
+<form method="POST" action="{{ url_for('save_order') }}">
+    <input type="text" name="name" placeholder="Name" />
+    <input type="text" name="ticket_number" placeholder="Ticket number" />
+    <button type="submit">Create</button> 
+</form>
+
+{% endblock %}
