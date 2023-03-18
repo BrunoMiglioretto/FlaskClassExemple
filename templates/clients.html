@@ -1,22 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "template.html" %}
+{% block contant %}
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clients</title>
-</head>
-<body>
-    <head>
-        <h1>Clients</h1>
-    </head> 
-    <main>
-        <ul>
-            <li>Client 01</li>
-            <li>Client 02</li>
-            <li>Client 03</li>
-        </ul>
-        <a href="/">Return to home page.</a>
-    </main>
-</body>
-</html>
+    <h1>Clients</h1>
+</head> 
+<main>
+    <ul>
+        {% for client in clients %}
+            <li>{{ client }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/">Return to home page.</a>
+</main>
+{% endblock %}

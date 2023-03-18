@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Restaurant</title>
+</head>
+<body>
+    <head>
+        <h1>My Restaurant</h1>
+        <h2>Menu Access</h2>
+        <ul>
+            {% for link in links %}
+                <li><a href="{{ link[0] }}">{{ link[1] }}</a></li>
+            {% endfor %}
+        </ul>
+    </head> 
+    {% block content %}{% endblock %}
+</body>
+</html>
