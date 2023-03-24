@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for, redirect
-from admin import admin
+from admin.admin import admin
 
 app = Flask(__name__)
 app.register_blueprint(admin, url_prefix="/admin")
